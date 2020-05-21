@@ -191,4 +191,26 @@ class BiStrokedBoxBallView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : BiStrokedBoxBallView) {
+
+        private val animator : Animator = Animator(view)
+        private val bsb : BiStrokeBoxBall = BiStrokeBoxBall(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            bsb.draw(canvas, paint)
+            animator.animate {
+                bsb.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            bsb.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
