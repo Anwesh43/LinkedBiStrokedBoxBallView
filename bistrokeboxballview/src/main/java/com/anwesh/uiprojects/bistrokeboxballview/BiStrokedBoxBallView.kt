@@ -62,3 +62,19 @@ fun Canvas.drawSBBNode(i : Int, scale : Float, paint : Paint) {
     drawStrokedBoxBall(scale, w, size, paint)
     restore()
 }
+
+class BiStrokedBoxBallView(ctx : Context) : View(ctx) {
+
+    override fun onDraw(canvas : Canvas) {
+
+    }
+
+    override fun onTouchEvent(event : MotionEvent) : Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+
+            }
+        }
+        return true
+    }
+}
