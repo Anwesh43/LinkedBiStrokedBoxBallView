@@ -46,7 +46,7 @@ fun Canvas.drawStrokedBoxBall(scale : Float, w : Float, size : Float, paint : Pa
     for (j in 0..1) {
         drawStrokedBoxPart(j, sf, w, size, paint)
     }
-    drawCircle(0f, 0f, size * sf, paint)
+    drawCircle(0f, 0f, size * sf.divideScale(2, parts), paint)
 }
 
 fun Canvas.drawSBBNode(i : Int, scale : Float, paint : Paint) {
@@ -65,14 +65,16 @@ fun Canvas.drawSBBNode(i : Int, scale : Float, paint : Paint) {
 
 class BiStrokedBoxBallView(ctx : Context) : View(ctx) {
 
-    override fun onDraw(canvas : Canvas) {
+    private val renderer : Renderer = Renderer(this)
 
+    override fun onDraw(canvas : Canvas) {
+        renderer.render(canvas)
     }
 
     override fun onTouchEvent(event : MotionEvent) : Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-
+                renderer.handleTap()
             }
         }
         return true
@@ -196,8 +198,9 @@ class BiStrokedBoxBallView(ctx : Context) : View(ctx) {
 
         private val animator : Animator = Animator(view)
         private val bsb : BiStrokeBoxBall = BiStrokeBoxBall(0)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-        fun render(canvas : Canvas, paint : Paint) {
+        fun render(canvas : Canvas) {
             canvas.drawColor(backColor)
             bsb.draw(canvas, paint)
             animator.animate {
