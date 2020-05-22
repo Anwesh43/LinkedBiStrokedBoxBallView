@@ -216,4 +216,14 @@ class BiStrokedBoxBallView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BiStrokedBoxBallView {
+
+            val view : BiStrokedBoxBallView = BiStrokedBoxBallView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
