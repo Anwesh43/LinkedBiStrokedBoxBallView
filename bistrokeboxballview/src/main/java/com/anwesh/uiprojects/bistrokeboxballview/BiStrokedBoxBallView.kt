@@ -34,7 +34,7 @@ fun Canvas.drawStrokedBoxPart(i : Int, sf : Float, w : Float, size : Float, pain
     drawLine(0f, -size, 0f, size, paint)
     for (j in 0..1) {
         save()
-        translate(0f, -size + 2 * size * i)
+        translate(0f, -size + 2 * size * j)
         drawLine(0f, 0f, -size, 0f, paint)
         restore()
     }
